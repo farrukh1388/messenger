@@ -1,0 +1,1 @@
+Hi #{name}! Thank you for participating in our meeting about #{meeting_name}. Here is the link #{link} for joining us.

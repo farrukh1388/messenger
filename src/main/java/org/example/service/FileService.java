@@ -17,6 +17,12 @@ public class FileService {
     }
 
     public String readTemplate() {
-        return null;
+        StringBuilder template = new StringBuilder();
+        String startingAppender = "";
+        while (scanner.hasNextLine()) {
+            template.append(startingAppender).append(scanner.nextLine());
+            startingAppender = "\n";
+        }
+        return template.toString();
     }
 }
