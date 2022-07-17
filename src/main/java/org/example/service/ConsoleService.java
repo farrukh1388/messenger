@@ -18,6 +18,14 @@ public class ConsoleService {
     }
 
     public Map<String, String> readPlaceholders() {
-        return new HashMap<>();
+        System.out.println("Please enter placeholders like: first_name>first_value;second_name>second_value;...;last_name>last_value;");
+        String line = scanner.nextLine();
+        String[] nameValuePairs = line.split(";");
+        Map<String, String> placeholders = new HashMap<>();
+        for (String pair : nameValuePairs) {
+            String[] keyValue = pair.split(">");
+            placeholders.put(keyValue[0], keyValue[1]);
+        }
+        return placeholders;
     }
 }
