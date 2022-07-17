@@ -36,4 +36,18 @@ public class TemplateServiceTest {
 
         Assertions.assertEquals("Placeholder for link not found", thrown.getMessage());
     }
+
+    @Test
+    void should_ignore_extra_placeholders() {
+        Map<String, String> placeholders = new HashMap<>();
+        placeholders.put("name", "Jack");
+        placeholders.put("meeting_name", "TDD in Java");
+        placeholders.put("link", "https://meeting.com/tddJava");
+        placeholders.put("extra", "whatever");
+        String expected = "Hi Jack! Thank you for participating in our meeting about TDD in Java. Here is the link https://meeting.com/tddJava for joining us.";
+
+        String result = templateService.replacePlaceholders(TEMPLATE, placeholders);
+
+        Assertions.assertEquals(expected, result);
+    }
 }
