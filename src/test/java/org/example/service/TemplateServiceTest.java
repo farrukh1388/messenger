@@ -31,7 +31,9 @@ public class TemplateServiceTest {
         placeholders.put("name", "Jack");
         placeholders.put("meeting_name", "TDD in Java");
 
-        Assertions.assertThrows(PlaceholderNotFoundException.class,
+        PlaceholderNotFoundException thrown = Assertions.assertThrows(PlaceholderNotFoundException.class,
                 () -> templateService.replacePlaceholders(TEMPLATE, placeholders));
+
+        Assertions.assertEquals("Placeholder for link not found", thrown.getMessage());
     }
 }
