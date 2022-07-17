@@ -26,6 +26,9 @@ class ConsoleServiceTest {
     @Test
     void should_throw_exception_when_placeholders_have_wrong_format() {
         ConsoleService consoleService = new ConsoleService(new Scanner("name:Jack,meeting_name:whatever"));
-        Assertions.assertThrows(PlaceholderFormatException.class, consoleService::readPlaceholders);
+        PlaceholderFormatException thrown = Assertions
+                .assertThrows(PlaceholderFormatException.class, consoleService::readPlaceholders);
+
+        Assertions.assertEquals("Wrong placeholder format", thrown.getMessage());
     }
 }
