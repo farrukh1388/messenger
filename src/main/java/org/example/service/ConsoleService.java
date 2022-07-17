@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class ConsoleService {
 
-    private final Scanner scanner;
+    private Scanner scanner;
 
-    public ConsoleService(Scanner scanner) {
+    public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
 

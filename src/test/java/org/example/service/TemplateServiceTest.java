@@ -2,10 +2,16 @@ package org.example.service;
 
 import org.example.exception.PlaceholderNotFoundException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TemplateServiceTest {
 
@@ -22,7 +28,7 @@ public class TemplateServiceTest {
 
         String result = templateService.replacePlaceholders(TEMPLATE, placeholders);
 
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -34,20 +40,22 @@ public class TemplateServiceTest {
         PlaceholderNotFoundException thrown = Assertions.assertThrows(PlaceholderNotFoundException.class,
                 () -> templateService.replacePlaceholders(TEMPLATE, placeholders));
 
-        Assertions.assertEquals("Placeholder for link not found", thrown.getMessage());
+        assertEquals("Placeholder for link not found", thrown.getMessage());
     }
 
-    @Test
-    void should_ignore_extra_placeholders() {
+    @TestFactory
+    Stream<DynamicTest> should_ignore_extra_placeholders() {
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("name", "Jack");
         placeholders.put("meeting_name", "TDD in Java");
         placeholders.put("link", "https://meeting.com/tddJava");
-        placeholders.put("extra", "whatever");
         String expected = "Hi Jack! Thank you for participating in our meeting about TDD in Java. Here is the link https://meeting.com/tddJava for joining us.";
 
-        String result = templateService.replacePlaceholders(TEMPLATE, placeholders);
-
-        Assertions.assertEquals(expected, result);
+        return IntStream.iterate(1, n -> n + 1).limit(5)
+                .mapToObj(n -> DynamicTest.dynamicTest("test" + n,
+                        () -> {
+                            placeholders.put("name" + n, "value" + n);
+                            assertEquals(expected, templateService.replacePlaceholders(TEMPLATE, placeholders));
+                        }));
     }
 }
