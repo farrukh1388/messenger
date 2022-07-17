@@ -1,5 +1,7 @@
 package org.example.service;
 
+import org.example.exception.PlaceholderFormatException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -24,6 +26,9 @@ public class ConsoleService {
         Map<String, String> placeholders = new HashMap<>();
         for (String pair : nameValuePairs) {
             String[] keyValue = pair.split(">");
+            if (keyValue.length != 2) {
+                throw new PlaceholderFormatException("Wrong placeholder format");
+            }
             placeholders.put(keyValue[0], keyValue[1]);
         }
         return placeholders;

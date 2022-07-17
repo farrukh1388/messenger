@@ -1,12 +1,9 @@
 package org.example.service;
 
 import org.example.exception.PlaceholderFormatException;
-import org.example.exception.PlaceholderNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 class ConsoleServiceTest {
