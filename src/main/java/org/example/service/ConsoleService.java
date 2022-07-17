@@ -11,11 +11,7 @@ public class ConsoleService {
     }
 
     public String readTemplate() {
-        StringBuilder template = new StringBuilder();
-        System.out.println("Please enter template");
-        while (scanner.hasNextLine()) {
-            template.append(scanner.nextLine());
-        }
-        return template.toString();
+        System.out.println("Please enter template:");
+        return scanner.nextLine();
     }
 }
