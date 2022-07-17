@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exception.PlaceholderNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ public class TemplateServiceTest {
     private final TemplateService templateService = new TemplateService();
 
     @Test
-    void replacePlaceholders() {
+    void should_replace_placeholders_correctly() {
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("name", "Jack");
         placeholders.put("meeting_name", "TDD in Java");
@@ -22,5 +23,15 @@ public class TemplateServiceTest {
         String result = templateService.replacePlaceholders(TEMPLATE, placeholders);
 
         Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void should_throw_exception_when_placeholder_does_not_exists() {
+        Map<String, String> placeholders = new HashMap<>();
+        placeholders.put("name", "Jack");
+        placeholders.put("meeting_name", "TDD in Java");
+
+        Assertions.assertThrows(PlaceholderNotFoundException.class,
+                () -> templateService.replacePlaceholders(TEMPLATE, placeholders));
     }
 }
