@@ -21,6 +21,7 @@ public class FileService {
             template.append(startingAppender).append(scanner.nextLine());
             startingAppender = "\n";
         }
+        scanner.close();
         return template.toString();
     }
 

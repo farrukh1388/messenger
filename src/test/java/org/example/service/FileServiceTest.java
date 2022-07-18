@@ -2,8 +2,10 @@ package org.example.service;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,9 +34,11 @@ class FileServiceTest {
 
     @Test
     @Tag("WorkingWithFileSystem")
-    void should_write_template_to_file() {
-        fileService.writeToFile("src/test/java/resources/testOutput.txt", TEMPLATE);
+    void should_write_template_to_file(@TempDir Path tempDir) {
+        Path output = tempDir.resolve("testOutput.txt");
 
-        assertEquals(TEMPLATE, fileService.readTemplate("src/test/java/resources/testOutput.txt"));
+        fileService.writeToFile(output.toString(), TEMPLATE);
+
+        assertEquals(TEMPLATE, fileService.readTemplate(output.toString()));
     }
 }

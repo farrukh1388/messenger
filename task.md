@@ -19,13 +19,13 @@ Tasks:
       TDD approach – (2 points) +
       @Parameterized runner and Dynamic tests (0.3 points) + 
       Implement meta annotations and filtering (0.3 points) +
-      TemporaryFolder rule (0.3 points)
+      TemporaryFolder rule (0.3 points) + (used @tempDir from junit5)
       Mock reading from file/console (0.3 points) + 
-      Use partial mock (0.3 points)
-      Use spy (0.3 points)
-      Create custom extension (jUnit5) to output test execution information to file (0.3 points)
-      Using ExpectedException rule to check exceptions + Assertion mechanism (0.3 points)
-      Implement Disabling test on condition (0.1 points)
+      Use partial mock (0.3 points) +
+      Use spy (0.3 points) +
+      Create custom extension (jUnit5) to output test execution information to file (0.3 points) +
+      Using ExpectedException rule to check exceptions + Assertion mechanism (0.3 points) + (used assertThrows from junit5)
+      Implement Disabling test on condition (0.1 points) + 
       Test quality and adequate coverage will be assessed as (0.5 points)
       Don't forget about good tests, checkstyle and other staff that already included into your build phase
       Extra mile:

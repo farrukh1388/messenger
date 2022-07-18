@@ -3,6 +3,8 @@ package org.example.service;
 import org.example.UnitTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.condition.DisabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -47,6 +49,7 @@ class MainServiceTest {
     }
 
     @UnitTest
+    @DisabledOnJre(JRE.OTHER)
     void when_arguments_count_is_zero() {
         String lineSeparator = System.getProperty("line.separator");
 
@@ -65,6 +68,7 @@ class MainServiceTest {
     }
 
     @UnitTest
+    @DisabledOnJre(JRE.OTHER)
     void when_arguments_count_is_two() {
         String lineSeparator = System.getProperty("line.separator");
 
@@ -84,6 +88,7 @@ class MainServiceTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 4, 5, 10})
+    @DisabledOnJre(JRE.OTHER)
     void should_throw_exception_while_args_count_not_zero_or_two(int count) {
         IllegalStateException thrown =
                 assertThrows(IllegalStateException.class, () -> mainService.process(new String[count]));

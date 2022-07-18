@@ -17,6 +17,7 @@ class ConsoleServiceTest {
 
     @Test
     void should_read_template_from_console() {
+
         try (Scanner scanner = new Scanner(TEMPLATE)) {
             consoleService.setScanner(scanner);
             Assertions.assertEquals(TEMPLATE, consoleService.readTemplate());
